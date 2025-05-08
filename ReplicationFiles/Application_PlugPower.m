@@ -169,13 +169,13 @@ dates_wCUSUM = [sadf_date, wCUSUM.breakdates(1)]
 Stats = [res1.sadf, CUSUM.stat, mCUSUM.stat, wCUSUM.stat]
 CritVals = [cv_sadf, CUSUM.crit(2), mCUSUM.crit(2), wCUSUM.crit(2)];
 %% Store Test Results
-testNames = {'supDF','CUSUM', 'mCUSUM', 'wCUSUM'};
+testNames = {'supADF','CUSUM', 'mCUSUM', 'wCUSUM'};
 Reject= [rej_adf CUSUM.rej(2) mCUSUM.rej(2) wCUSUM.rej(2)]
 Reject = array2table([round(Stats, 2); round(CritVals, 2); Reject] ,...
     'VariableNames',  testNames, "RowNames",{'Statistic', 'Critival Value', 'Reject?'})
 
 %% Store Datestamping Results
-dateNames = {'SADF', 'Chow'};
+dateNames = {'PWY', 'Chow'};
 BreakDates = {};%:%nan(2, 4);
 BreakDates(1,~isnan(dates_wCUSUM')) = cellstr(datestr(dates(dates_wCUSUM(~isnan(dates_wCUSUM')))))'
 BreakDates = cell2table(BreakDates, "RowNames",{'Dates'}, "VariableNames",dateNames)
@@ -193,7 +193,7 @@ colors = [0.4980    0.2353    0.5529,
     0.8118    0.1098    0.5647,
     0.9765    0.4824    0.4471];
 
-testNames = {'SADF', 'supDF', 'CUSUM', 'mCUSUM', 'wCUSUM'};
+testNames = {'ADF', 'supDF', 'CUSUM', 'mCUSUM', 'wCUSUM'};
 
     badfs  = res1.badfs;
 
@@ -240,7 +240,7 @@ xlim([dates(1), dates(end)])
 %xlabel('t', 'Interpreter','latex')
 
 box on
-legend(testNames{plottests}, 'Interpreter','latex', 'location', 'southwest')
+legend(testNames{plottests}, 'Interpreter','latex', 'location', 'southeast')
 legend boxoff
 
 

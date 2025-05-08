@@ -137,19 +137,19 @@ est_dates = [sadf_date, wCUSUM.breakdates(1)]
 Stats = [res1.sadf, CUSUM.stat, mCUSUM.stat, wCUSUM.stat];
 CritVals = [cv_sadf, CUSUM.crit(2), mCUSUM.crit(2), wCUSUM.crit(2)];
 %% Store Test Results
-testNames = {'supDF','CUSUM', 'mCUSUM', 'wCUSUM'};
+testNames = {'supADF','CUSUM', 'mCUSUM', 'wCUSUM'};
 Reject= [rej_adf CUSUM.rej(2) mCUSUM.rej(2) wCUSUM.rej(2)]
 Reject = array2table([round(Stats, 2); round(CritVals, 2); Reject] ,...
     'VariableNames',  testNames, "RowNames",{'Statistic', 'Critival Value', 'Reject?'})
 
 %% Store Datestamping Results
-dateNames = {'SADF', 'Chow'};
+dateNames = {'PWY', 'Chow'};
 BreakDates = {};%:%nan(2, 4);
 BreakDates(1,~isnan(est_dates')) = cellstr(datestr(dates(est_dates(~isnan(est_dates')))))'
 BreakDates = cell2table(BreakDates, "RowNames",{'Dates'}, "VariableNames",dateNames)
 %% Figure 7b): Normalized bubble statistics
 
-testNames = {'SADF', 'CUSUM', 'mCUSUM', 'wCUSUM'};
+testNames = {'ADF', 'CUSUM', 'mCUSUM', 'wCUSUM'};
 
   badfs  = res1.badfs;
 tdata = [ [nan(floor(r0*n-1), 1); badfs./cv_sadf], ...
@@ -200,6 +200,7 @@ xaxisproperties.TickLabelInterpreter = 'latex'; % latex for x-axis
 yaxisproperties= get(gca, 'YAxis');
 yaxisproperties.TickLabelInterpreter = 'latex';   % latex for y-axis
 xlim([dates(1), dates(end)])
+ylim([-1.7 1.5])
 %xlabel('t', 'Interpreter','latex')
 
 box on
