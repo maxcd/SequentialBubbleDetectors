@@ -1,5 +1,7 @@
 function pval=EoS_test(y,B, detrend, twosided)
 
+% B is the block-size, default is 10 observations
+
 if nargin > 4
     error('The function EoS_test takes at most 2 input arguments')
 end

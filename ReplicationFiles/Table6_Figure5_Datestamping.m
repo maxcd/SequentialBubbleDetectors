@@ -1,10 +1,11 @@
 clear; clc;
 addpath("functions")
 %%
-% Produces one Panel of Table 7. Chose the desired number of observations
-% below:
+% Produces one Panel of Table 6. Chose the desired number of observations
+% below. 
 n = 100;            % # observations
-
+% n=200;
+% n = 400;
 
 m=10000;            % number of replications
 lambda0 = 0.5;       % unit root sample anteil
@@ -161,7 +162,7 @@ res_tt = array2table([round(mode_est, 0); round(mean_est, 0); round(dateStd,0) ;
     'VariableNames', dateNames);
 
 plotlist = [1,4,2];
-TableSeven = res_tt(:,plotlist)
+TableSix = res_tt(:,plotlist)
 
 %% Figure5: Plot Breakdates used with Sample cutting by wCUSUM
 plotdates= dates_wC;

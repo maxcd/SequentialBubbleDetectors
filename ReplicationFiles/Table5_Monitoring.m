@@ -210,7 +210,7 @@ DelayMean = array2table(DelayMean, 'VariableNames', TestNames);
 % date stamping
 lamtab = array2table(lam0seq', 'VariableNames', {'r_e'});
 breaktab = array2table(min(floor(lam0seq'.*T)+1,TT), 'VariableNames', {'r_e'});
-TableSix = table(breaktab, round(Rejections, 3), round(DelayMean, 0))
+TableFive= table(breaktab, round(Rejections, 3), round(DelayMean, 0))
 
     
 

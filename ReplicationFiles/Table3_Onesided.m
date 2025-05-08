@@ -1,9 +1,6 @@
 clear all; clc;
 addpath('functions')
 
-Output = 'Table4_ii';
-% 'Table4_i' - DGP with positive and negative bubbles, twosided tests
-% 'Table4_ii'- DGP with only positive bubbles, onesided tests
 
 
 m       = 10000; % mc Repititions
@@ -14,12 +11,16 @@ T       = 100;
 
 
 
-switch Output
-    case 'Table4_i'
-        allow_neg_bubbles = 1;
-    case 'Table4_ii'
-        allow_neg_bubbles = 0;
-end
+for subtabs=[1:2]
+
+    switch subtabs
+        case 1 
+            tabtitle = 'Table3_i_twosided',
+            allow_neg_bubbles = 1;
+        case 2 
+            tabtitle = 'Table3_ii_onesided';
+            allow_neg_bubbles = 0;
+    end
 
 
 
@@ -68,7 +69,7 @@ for ii=1:length(lam0seq)
         rej_cus    = rej_cus  + cres.rej(2);
         
         %  EoS original (AHLT_10)
-        rej_ahlt = rej_ahlt + (EoS_test(y,10,0,1) < 0.05);
+        rej_ahlt = rej_ahlt + (EoS_test(y,10,detrend,twosided) < 0.05);
         
         % weighted-CUSUM
         wres = wCUSUMtest(yges, detrend, twosided);
@@ -81,7 +82,13 @@ for ii=1:length(lam0seq)
    RejectionRates(ii,:) =  [rej_sdf/m, rej_cus/m, rej_mcus/m, rej_wcus/m, rej_ahlt/m];
 end
 
-%% Size: T100, rho=1
+ 
+RejectionRates = round(RejectionRates, 3);
+switch subtabs
+    case 1 
+        tab3_i_twosided = array2table([lam0seq', RejectionRates], 'VariableNames', ['r_e', TestNames])
+    case 2
+        tab3_ii_onesided = array2table([lam0seq', RejectionRates], 'VariableNames', ['r_e', TestNames])
+end
 
-RR = array2table([lam0seq', RejectionRates], 'VariableNames', ['r_e', TestNames])
-
+end

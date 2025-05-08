@@ -6,7 +6,7 @@ addpath('functions')
 DGP     = 0;
 % 0  - constant mean
 % 22 - trend
-m       = 1000; % mc Repititions
+m       = 10000; % mc Repititions
 rho     = 1.05;
 
 %% chose volatility types
@@ -43,7 +43,7 @@ lam1seq = min(lam0seq+r1, 1);
 TestNames = {'supDF', 'CUSUM',  'AHLT$_{10}$',  'pEoS$_{0.3}$', 'wCUSUM','mCUSUM'};
 ntests = length(TestNames);
 
-TableFive =[];
+TableFour =[];
 
 for ii=1:length(lam0seq)
         
@@ -134,15 +134,17 @@ for ii=1:length(lam0seq)
 
     end
     
+    RejectionRates = round(RejectionRates, 3);
+
     %% Size: T100, rho=1
     % 0.0507    0.0506    0.0483    0.0501    0.0537    0.0467
     tmp = array2table(HetNames', 'VariableNames', {'vola type'} );
     tmp2 = array2table(ones(length(HetNames'),1)*lam0, 'VariableNames', {'r_e'} );
     RR = [tmp2, tmp, array2table(RejectionRates(:,SelectTests), 'VariableNames', TestNames(SelectTests))];
-    TableFive = [TableFive; RR];
+    TableFour = [TableFour; RR];
     
 
 
 end
 
-TableFive
+TableFour
