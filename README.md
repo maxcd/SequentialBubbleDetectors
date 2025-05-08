@@ -1,4 +1,4 @@
-# SequentialBubbleDetectors
+# Replication Files for Sequential Bubble Detectors
 Replication Files for the simulations of the sequential detectors and the two empirical applications in the Paper "Sequential Detector Statistics for Speculative Bubbles" by Jörg Breitung and Max Diegel.
 
 This code is free to use for academic purposes only, provided that the 
